@@ -1,17 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header/>
+    <QuestionBox 
+      v-if="questions.length"
+      :currentQuestion="questions[index]" 
+      :next="nextQuestion" 
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import QuestionBox from './components/QuestionBox.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    QuestionBox
+  },
+  data() {
+    return {
+      questions: [],
+      index: 0
+    }
+  },
+  methods: {
+    nextQuestion() {
+      this.index++;
+      if (this.index === (this.questions.length)) {
+        this.index = 0;
+      }
+    }
+  },
+  mounted: function() {
+     fetch('https://opentdb.com/api.php?amount=10&type=multiple', {
+       method: 'get'
+     }).then((response) => {
+      return (response.json());
+     }).then((data) => {
+      // console.log(data);
+      this.questions = data.results;
+     });
   }
 }
 </script>
@@ -23,6 +53,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
