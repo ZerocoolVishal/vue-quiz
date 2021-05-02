@@ -19,6 +19,10 @@ import QuestionBox from './components/QuestionBox.vue'
 
 export default {
   name: 'App',
+  metaInfo: {
+    title: 'Default Title',
+    titleTemplate: '%s | My Awesome Webapp'
+  },
   components: {
     Header,
     QuestionBox

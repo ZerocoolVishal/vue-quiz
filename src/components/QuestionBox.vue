@@ -7,20 +7,24 @@
 
       <hr class="my-4">
 
-      <b-list-group>
-        <b-list-group-item
-            v-for="(answer, index) in shuffleAnswers"
-            :key="index"
-            :class="{
-              'selected-ans': selectedIndex === index,
-              'correct-ans': (isSubmitted && index === correctIndex),
-              'incorrect-ans': (isSubmitted && selectedIndex === index && index !== correctIndex)
-            }"
-            :disabled="isSubmitted"
-            @click="selectAnswer(index)">
-          {{ answer }}
-        </b-list-group-item>
-      </b-list-group>
+      <b-row>
+        <b-col md="6" offset-md="3">
+          <b-list-group>
+            <b-list-group-item
+                v-for="(answer, index) in shuffleAnswers"
+                :key="index"
+                :class="{
+                  'selected-ans': selectedIndex === index,
+                  'correct-ans': (isSubmitted && index === correctIndex),
+                  'incorrect-ans': (isSubmitted && selectedIndex === index && index !== correctIndex)
+                }"
+                :disabled="isSubmitted"
+                @click="selectAnswer(index)">
+              {{ answer }}
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>
+      </b-row>
 
       <hr class="my-4">
 
